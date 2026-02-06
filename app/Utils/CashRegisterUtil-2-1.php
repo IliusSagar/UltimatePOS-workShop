@@ -258,7 +258,6 @@ class CashRegisterUtil extends Util
             'cash_registers.location_id',
             'cash_registers.denominations',
             DB::raw("SUM(IF(transaction_type='initial', amount, 0)) as cash_in_hand"),
-            DB::raw("SUM(IF(transaction_type='collection', amount, 0)) as due_collection"),
             DB::raw("SUM(IF(transaction_type='sell', amount, IF(transaction_type='refund', -1 * amount, 0))) as total_sale"),
             DB::raw("SUM(IF(transaction_type='expense', IF(transaction_type='refund', -1 * amount, amount), 0)) as total_expense"),
             DB::raw("SUM(IF(pay_method='cash', IF(transaction_type='sell', amount, 0), 0)) as total_cash"),

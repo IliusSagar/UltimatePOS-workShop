@@ -14,11 +14,16 @@ If you discover a security vulnerability within ultimate POS, please send an e-m
 
 The Ultimate POS software is licensed under the [Codecanyon license](https://codecanyon.net/licenses/standard).
 
+## Server Deployment File & Code
+==> Http/Controllers/TransactionPaymentController.php
+==> resources/views/cash_register/payment_details.blade.php
+==> App/Utils/CashRegisterUtil.php
+
 ## Register Customs Developement File
 
 ==> Http/Coontrollers/CashRegisterController.php
     ==> getRegisterDetails [135]
 ==> Http/Utils/CashRegisterUtil.php
-    ==> updateSellPayments [90] -- total_cash
+    ==> getRegisterDetails [268]
 ==> resources/views/cash_egister/payment_details.blade.php
 ==> Database : cash_register_transactions

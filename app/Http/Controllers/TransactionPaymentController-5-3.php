@@ -124,15 +124,19 @@ class TransactionPaymentController extends Controller
                 // End Discount Logic
 
                 // Start Cash Register Transactions
-                
+                if (
+                    !empty($inputs['amount']) &&
+                    $inputs['method'] === 'cash' &&
+                    !empty($request->input('cash_register_id'))
+                ) {
                     CashRegisterTransaction::create([
-                        'cash_register_id' => '2',
+                        'cash_register_id' => $request->input('cash_register_id'),
                         'amount'           => $inputs['amount'],
-                        'pay_method'       => 'duepay', 
-                        'type'             => 'credit', 
-                        'transaction_type' => 'collection', 
+                        'pay_method'       => $inputs['method'], // cash
+                        'type'             => 'credit', // payment received
+                        'transaction_type' => $transaction->type, // sell / purchase / expense
                     ]);
-       
+                }
 
                 // End Cash Register Transactions
 

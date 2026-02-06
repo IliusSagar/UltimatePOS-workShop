@@ -28,17 +28,6 @@
       </tr>
       <tr>
         <td>
-          Due Collection:
-        </th>
-        <td>
-          <span class="display_currency" data-currency_symbol="true">{{ $register_details->due_collection }}</span>
-        </td>
-        <td>
-          <span class="display_currency" data-currency_symbol="true">o</span>
-        </td>
-      </tr>
-      <tr>
-        <td>
           @lang('cash_register.checque_payment'):
         </td>
         <td>
@@ -263,36 +252,12 @@
     </table>
     <hr>
     <span>
-
-      <!-- @lang('sale.total') = 
+        @lang('sale.total') = 
         @format_currency($register_details->cash_in_hand) (@lang('messages.opening')) + 
         @format_currency($register_details->total_sale + $register_details->total_refund) (@lang('business.sale')) - 
         @format_currency($register_details->total_refund) (@lang('lang_v1.refund')) - 
         @format_currency($register_details->total_expense) (@lang('lang_v1.expense')) 
-        = @format_currency($register_details->cash_in_hand + $register_details->total_sale - $register_details->total_expense) -->
-    
-        <!-- @lang('sale.total') = 
-        @format_currency($register_details->cash_in_hand) (@lang('messages.opening')) + @format_currency($register_details->due_collection) (Due Collection) -->
-
-       @lang('sale.total') =
-@format_currency($register_details->cash_in_hand) (@lang('messages.opening'))
-+
-@format_currency($register_details->due_collection) (Due Collection)
-+
-@format_currency($register_details->total_sale) (@lang('business.sale'))
--
-@format_currency($register_details->total_refund) (@lang('lang_v1.refund'))
--
-@format_currency($register_details->total_expense) (@lang('lang_v1.expense'))
-=
-@format_currency(
-    $register_details->cash_in_hand
-    + $register_details->total_sale
-    + $register_details->due_collection
-    - $register_details->total_refund
-    - $register_details->total_expense
-)
-
+        = @format_currency($register_details->cash_in_hand + $register_details->total_sale - $register_details->total_expense)
     </span>
   </div>
 </div>
