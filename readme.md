@@ -18,6 +18,13 @@ The Ultimate POS software is licensed under the [Codecanyon license](https://cod
 ==> Http/Controllers/TransactionPaymentController.php
 ==> resources/views/cash_register/payment_details.blade.php
 ==> App/Utils/CashRegisterUtil.php
+==> app/http/controllers/ExpenseController.php
+
+## POS & Admin Expense File Find Out
+    => resources/views/expense/add_expense_modal.blade.php
+    => resources/views/expense/create.blade.php
+    => app/Http/Controllers/ExpenseController.php [361 = store]
+    => app/Utils/TransactionUtil.php [5898 = createExpense]
 
 ## Register Customs Developement File
 

@@ -358,94 +358,61 @@ class ExpenseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-  public function store(Request $request)
-{
-    if (!auth()->user()->can('expense.add')) {
-        abort(403, 'Unauthorized action.');
-    }
-
-    try {
-        $business_id = $request->session()->get('user.business_id');
-
-        // Subscription check
-        if (!$this->moduleUtil->isSubscribed($business_id)) {
-            return $this->moduleUtil->expiredResponse(
-                action([\App\Http\Controllers\ExpenseController::class, 'index'])
-            );
+    public function store(Request $request)
+    {
+        if (! auth()->user()->can('expense.add')) {
+            abort(403, 'Unauthorized action.');
         }
 
-        // Validate document
-        $request->validate([
-            'document' => 'file|max:' . (config('constants.document_size_limit') / 1000),
-        ]);
+        try {
+            $business_id = $request->session()->get('user.business_id');
 
-        $user_id = $request->session()->get('user.id');
+            //Check if subscribed or not
+            if (! $this->moduleUtil->isSubscribed($business_id)) {
+                return $this->moduleUtil->expiredResponse(action([\App\Http\Controllers\ExpenseController::class, 'index']));
+            }
 
-        DB::beginTransaction();
+            //Validate document size
+            $request->validate([
+                'document' => 'file|max:'.(config('constants.document_size_limit') / 1000),
+            ]);
 
-        /**
-         * STEP 1: Create expense
-         */
-        $expense = $this->transactionUtil->createExpense(
-            $request,
-            $business_id,
-            $user_id
-        );
+            $user_id = $request->session()->get('user.id');
 
-        /**
-         * STEP 2: Add payments (✅ FIXED)
-         * No ajax() condition
-         */
-        $payments = $request->input('payment', []);
+            DB::beginTransaction();
 
-        if (!empty($payments)) {
-            $this->cashRegisterUtil->addSellPayments(
-                $expense,
-                $payments
-            );
+            $expense = $this->transactionUtil->createExpense($request, $business_id, $user_id);
+
+            if (request()->ajax()) {
+                $payments = ! empty($request->input('payment')) ? $request->input('payment') : [];
+                $this->cashRegisterUtil->addSellPayments($expense, $payments);
+            }
+
+            $this->transactionUtil->activityLog($expense, 'added');
+
+            event(new ExpenseCreatedOrModified($expense));
+
+            DB::commit();
+
+            $output = ['success' => 1,
+                'msg' => __('expense.expense_add_success'),
+            ];
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            \Log::emergency('File:'.$e->getFile().'Line:'.$e->getLine().'Message:'.$e->getMessage());
+
+            $output = ['success' => 0,
+                'msg' => __('messages.something_went_wrong'),
+            ];
         }
 
-        /**
-         * STEP 3: Activity log
-         */
-        $this->transactionUtil->activityLog($expense, 'added');
+        if (request()->ajax()) {
+            return $output;
+        }
 
-        /**
-         * STEP 4: Event
-         */
-        event(new ExpenseCreatedOrModified($expense));
-
-        DB::commit();
-
-        $output = [
-            'success' => 1,
-            'msg' => __('expense.expense_add_success'),
-        ];
-
-    } catch (\Exception $e) {
-
-        DB::rollBack();
-
-        \Log::emergency(
-            'File:' . $e->getFile() .
-            ' Line:' . $e->getLine() .
-            ' Message:' . $e->getMessage()
-        );
-
-        $output = [
-            'success' => 0,
-            'msg' => __('messages.something_went_wrong'),
-        ];
+        return redirect('expenses')->with('status', $output);
     }
-
-    if ($request->ajax()) {
-        return response()->json($output);
-    }
-
-    return redirect('expenses')->with('status', $output);
-}
-
-
 
     /**
      * Display the specified resource.
