@@ -14,7 +14,6 @@ use Datatables;
 use DB;
 use Illuminate\Http\Request;
 use App\CashRegisterTransaction;
-use App\CashRegister;
 
 class TransactionPaymentController extends Controller
 {
@@ -125,18 +124,9 @@ class TransactionPaymentController extends Controller
                 // End Discount Logic
 
                 // Start Cash Register Transactions
-
-                $cash_register = CashRegister::where('business_id', $business_id)
-    ->where('user_id', auth()->id())
-    ->where('status', 'open')
-    ->first();
-
-if (!$cash_register) {
-    throw new \Exception('No active cash register found');
-}
                 
                     CashRegisterTransaction::create([
-                        'cash_register_id' => $cash_register->id,
+                        'cash_register_id' => '2',
                         'amount'           => $inputs['amount'],
                         'pay_method'       => 'duepay', 
                         'type'             => 'credit', 
