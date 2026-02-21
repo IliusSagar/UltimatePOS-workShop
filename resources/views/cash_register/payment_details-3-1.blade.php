@@ -20,7 +20,7 @@
           @lang('cash_register.cash_payment'):
         </th>
         <td>
-          <span class="display_currency" data-currency_symbol="true">{{ ($register_details->total_cash) + ($register_details->total_cash_collection) }}</span>
+          <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_cash }}</span>
         </td>
         <td>
           <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_cash_expense }}</span>
@@ -42,7 +42,7 @@
           @lang('cash_register.checque_payment'):
         </td>
         <td>
-          <span class="display_currency" data-currency_symbol="true">{{ ($register_details->total_cheque) + ($register_details->total_cheque_collection) }}</span>
+          <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_cheque }}</span>
         </td>
         <td>
           <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_cheque_expense }}</span>
@@ -53,7 +53,7 @@
           @lang('cash_register.card_payment'):
         </td>
         <td>
-          <span class="display_currency" data-currency_symbol="true">{{ ($register_details->total_card) + ($register_details->total_card_collection) }}</span>
+          <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_card }}</span>
         </td>
         <td>
           <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_card_expense }}</span>
@@ -64,7 +64,7 @@
           @lang('cash_register.bank_transfer'):
         </td>
         <td>
-          <span class="display_currency" data-currency_symbol="true">{{ ($register_details->total_bank_transfer) + ($register_details->total_bank_transfer_collection) }}</span>
+          <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_bank_transfer }}</span>
         </td>
         <td>
           <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_bank_transfer_expense }}</span>
@@ -75,7 +75,7 @@
           @lang('lang_v1.advance_payment'):
         </td>
         <td>
-          <span class="display_currency" data-currency_symbol="true">{{ ($register_details->total_advance) + ($register_details->total_advance_collection) }}</span>
+          <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_advance }}</span>
         </td>
         <td>
           <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_advance_expense }}</span>
@@ -87,7 +87,7 @@
             {{$payment_types['custom_pay_1']}}:
           </td>
           <td>
-            <span class="display_currency" data-currency_symbol="true">{{ ($register_details->total_custom_pay_1) + ($register_details->total_custom_pay_1_collection) }}</span>
+            <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_1 }}</span>
           </td>
           <td>
             <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_1_expense }}</span>
@@ -100,7 +100,7 @@
             {{$payment_types['custom_pay_2']}}:
           </td>
           <td>
-            <span class="display_currency" data-currency_symbol="true">{{ ($register_details->total_custom_pay_2) + ($register_details->total_custom_pay_2_collection) }}</span>
+            <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_2 }}</span>
           </td>
           <td>
             <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_2_expense }}</span>
@@ -113,7 +113,7 @@
             {{$payment_types['custom_pay_3']}}:
           </td>
           <td>
-            <span class="display_currency" data-currency_symbol="true">{{ ($register_details->total_custom_pay_3) + ($register_details->total_custom_pay_3_collection) }}</span>
+            <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_3 }}</span>
           </td>
           <td>
             <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_3_expense }}</span>
@@ -126,7 +126,7 @@
             {{$payment_types['custom_pay_4']}}:
           </td>
           <td>
-            <span class="display_currency" data-currency_symbol="true">{{ ($register_details->total_custom_pay_4) + ($register_details->total_custom_pay_4_collection) }}</span>
+            <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_4 }}</span>
           </td>
           <td>
             <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_4_expense }}</span>
@@ -139,7 +139,7 @@
             {{$payment_types['custom_pay_5']}}:
           </td>
           <td>
-            <span class="display_currency" data-currency_symbol="true">{{ ($register_details->total_custom_pay_5) + ($register_details->total_custom_pay_5_collection) }}</span>
+            <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_5 }}</span>
           </td>
           <td>
             <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_5_expense }}</span>
@@ -152,7 +152,7 @@
             {{$payment_types['custom_pay_6']}}:
           </td>
           <td>
-            <span class="display_currency" data-currency_symbol="true">{{ ($register_details->total_custom_pay_6) + ($register_details->total_custom_pay_6_collection) }}</span>
+            <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_6 }}</span>
           </td>
           <td>
             <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_6_expense }}</span>
@@ -165,7 +165,7 @@
             {{$payment_types['custom_pay_7']}}:
           </td>
           <td>
-            <span class="display_currency" data-currency_symbol="true">{{ ($register_details->total_custom_pay_7) + ($register_details->total_custom_pay_7_collection) }}</span>
+            <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_7 }}</span>
           </td>
           <td>
             <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_custom_pay_7_expense }}</span>
@@ -177,7 +177,7 @@
           @lang('cash_register.other_payments'):
         </td>
         <td>
-          <span class="display_currency" data-currency_symbol="true">{{ ($register_details->total_other) + ($register_details->total_other_collection) }}</span>
+          <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_other }}</span>
         </td>
         <td>
           <span class="display_currency" data-currency_symbol="true">{{ $register_details->total_other_expense }}</span>

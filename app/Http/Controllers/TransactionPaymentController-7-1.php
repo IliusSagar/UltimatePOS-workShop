@@ -138,7 +138,7 @@ if (!$cash_register) {
                     CashRegisterTransaction::create([
                         'cash_register_id' => $cash_register->id,
                         'amount'           => $inputs['amount'],
-                        'pay_method'       => $inputs['method'], 
+                        'pay_method'       => 'duepay', 
                         'type'             => 'credit', 
                         'transaction_type' => 'collection', 
                     ]);
